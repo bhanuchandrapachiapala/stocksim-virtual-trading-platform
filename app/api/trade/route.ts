@@ -79,7 +79,7 @@ export async function POST(request: Request) {
 
     const { data: appUser, error: userError } = await supabase
       .from('users')
-      .select('id, cash_balance')
+      .select('id, cash_balance, is_admin')
       .eq('id', userId)
       .single()
 
@@ -87,6 +87,13 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { success: false, error: 'User profile not found' },
         { status: 404 }
+      )
+    }
+
+    if (appUser.is_admin === true) {
+      return NextResponse.json(
+        { success: false, error: 'Admin accounts cannot trade stocks' },
+        { status: 403 }
       )
     }
 

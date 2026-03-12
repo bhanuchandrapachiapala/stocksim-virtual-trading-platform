@@ -19,7 +19,7 @@ export default async function DashboardLayout({
 
   const { data: profile } = await supabase
     .from('users')
-    .select('cash_balance, avatar_url, display_name')
+    .select('cash_balance, avatar_url, display_name, is_admin')
     .eq('id', authUser.id)
     .single()
 
@@ -37,7 +37,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
-      <DashboardSidebar />
+      <DashboardSidebar isAdmin={profile?.is_admin === true} />
       <main className="pl-[240px]">
         <DashboardHeader user={headerUser} />
         <div className="p-6">{children}</div>

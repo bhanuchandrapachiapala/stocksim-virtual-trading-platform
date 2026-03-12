@@ -15,7 +15,7 @@ export default async function LeaderboardPage() {
 
   const [usersRes, holdingsRes, ordersRes, achievementsRes, fundsRes, fundMembersRes] =
     await Promise.all([
-      supabase.from('users').select('id, display_name, avatar_url, cash_balance'),
+      supabase.from('users').select('id, display_name, avatar_url, cash_balance, is_admin'),
       supabase
         .from('holdings')
         .select('user_id, quantity, companies(current_price)'),
@@ -36,6 +36,7 @@ export default async function LeaderboardPage() {
     display_name: string
     avatar_url: string | null
     cash_balance: number
+    is_admin: boolean
   }>
   const holdings = (holdingsRes.data ?? []) as unknown as Array<{
     user_id: string
@@ -99,24 +100,26 @@ export default async function LeaderboardPage() {
     memberCountByFund.set(m.fund_id, (memberCountByFund.get(m.fund_id) ?? 0) + 1)
   }
 
-  const traders = users.map((u) => {
-    const cash = u.cash_balance ?? 0
-    const portfolio = portfolioByUser.get(u.id) ?? 0
-    const netWorth = cash + portfolio
-    const pnlPct =
-      STARTING_BALANCE > 0
-        ? ((netWorth - STARTING_BALANCE) / STARTING_BALANCE) * 100
-        : 0
-    return {
-      id: u.id,
-      display_name: u.display_name ?? 'Unknown',
-      avatar_url: u.avatar_url,
-      net_worth: netWorth,
-      pnl_pct: pnlPct,
-      trades: tradesByUser.get(u.id) ?? 0,
-      achievements: achievementsByUser.get(u.id) ?? 0,
-    }
-  })
+  const traders = users
+    .filter((u) => !u.is_admin)
+    .map((u) => {
+      const cash = u.cash_balance ?? 0
+      const portfolio = portfolioByUser.get(u.id) ?? 0
+      const netWorth = cash + portfolio
+      const pnlPct =
+        STARTING_BALANCE > 0
+          ? ((netWorth - STARTING_BALANCE) / STARTING_BALANCE) * 100
+          : 0
+      return {
+        id: u.id,
+        display_name: u.display_name ?? 'Unknown',
+        avatar_url: u.avatar_url,
+        net_worth: netWorth,
+        pnl_pct: pnlPct,
+        trades: tradesByUser.get(u.id) ?? 0,
+        achievements: achievementsByUser.get(u.id) ?? 0,
+      }
+    })
 
   traders.sort((a, b) => b.net_worth - a.net_worth)
 
