@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StockSim — Virtual Stock Market Simulator
 
-## Getting Started
+**Live App → [stocksim-virtual-trading-platform.vercel.app](https://stocksim-virtual-trading-platform.vercel.app)**
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+StockSim is a full-stack virtual stock market simulation platform where you trade shares of fictional companies using virtual money. No real money, no real risk — just pure strategy and competition.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Every new user starts with **$9,000 in virtual cash** and jumps straight into a live market with 25 companies across 10 sectors. Buy stocks, watch prices move in real time, compete on the global leaderboard, and see if you can build the biggest portfolio.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## What You Can Do
 
-## Learn More
+- **Trade stocks** — Buy and sell shares of 25 fictional companies. Every trade you make moves the market price for everyone.
+- **Build a portfolio** — Track your holdings, monitor your P&L, and watch your net worth grow (or shrink).
+- **Join or create mutual funds** — Pool money with other users and let a fund manager trade on your behalf.
+- **Take out loans** — Borrow up to 50% of your net worth from the virtual bank. Miss your repayment deadline and your holdings get liquidated.
+- **Apply for IPOs** — Get in early on new companies before they hit the open market.
+- **Set limit orders** — Set a target price and let the system execute your trade automatically when it hits.
+- **Compete on the leaderboard** — Rankings update in real time based on everyone's current net worth.
+- **Read the news** — Market news posted by the admin gives you signals on which companies are doing well or poorly.
+- **Earn achievement badges** — First Trade, Whale, Diversified, Fund Manager, and more.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How the Market Works
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Stock prices move based on real supply and demand — every buy pushes the price up, every sell pushes it down.
+- Shares you buy today cannot be sold until the next day (24-hour hold period). This prevents instant price manipulation.
+- Loans carry 5% weekly interest and must be repaid within 30 days or your holdings are automatically sold to cover the debt.
+- IPO shares are allocated pro-rata if a company is oversubscribed.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+*Virtual platform only. Not real financial advice.*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Designed & Developed by **Bhanu Chandra**
