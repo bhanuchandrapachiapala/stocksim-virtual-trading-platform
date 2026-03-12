@@ -21,7 +21,7 @@ export default async function AdminUsersPage() {
     created_at: string
   }>
 
-  const holdings = (holdingsRes.data ?? []) as Array<{
+  const holdings = (holdingsRes.data ?? []) as unknown as Array<{
     user_id: string
     quantity: number
     companies: { current_price: number } | null
