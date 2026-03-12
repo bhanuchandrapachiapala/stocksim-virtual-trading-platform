@@ -30,7 +30,7 @@ export default async function AdminIPOPage() {
     companies: Array.isArray(ipo.companies) ? ipo.companies[0] ?? null : ipo.companies,
   }))
 
-  const companiesNotInIpo = (companiesRes.data ?? []) as Array<{
+  const companiesNotInIpo = (companiesRes.data ?? []) as unknown as Array<{
     id: string
     name: string
     ticker: string

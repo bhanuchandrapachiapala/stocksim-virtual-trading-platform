@@ -33,7 +33,7 @@ export default async function MarketPage() {
       .order('recorded_at', { ascending: false }),
   ])
 
-  const companies = (companiesResult.data ?? []) as Array<{
+  const companies = (companiesResult.data ?? []) as unknown as Array<{
     id: string
     name: string
     ticker: string
@@ -43,7 +43,7 @@ export default async function MarketPage() {
     shares_outstanding: number
   }>
 
-  const history = (historyResult.data ?? []) as Array<{
+  const history = (historyResult.data ?? []) as unknown as Array<{
     company_id: string
     price: number
     recorded_at: string

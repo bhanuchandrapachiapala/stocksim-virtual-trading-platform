@@ -9,7 +9,7 @@ export default async function NewsPage() {
     .order('is_pinned', { ascending: false })
     .order('created_at', { ascending: false })
 
-  const articles = (news ?? []) as Array<{
+  const articles = (news ?? []) as unknown as Array<{
     id: string
     title: string
     body: string

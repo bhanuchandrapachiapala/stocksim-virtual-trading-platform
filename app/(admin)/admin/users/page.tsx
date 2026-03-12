@@ -11,7 +11,7 @@ export default async function AdminUsersPage() {
     supabase.from('loans').select('user_id, status').eq('status', 'active'),
   ])
 
-  const users = (usersRes.data ?? []) as Array<{
+  const users = (usersRes.data ?? []) as unknown as Array<{
     id: string
     display_name: string
     email: string
@@ -27,8 +27,8 @@ export default async function AdminUsersPage() {
     companies: { current_price: number } | null
   }>
 
-  const orders = (ordersRes.data ?? []) as Array<{ user_id: string }>
-  const activeLoans = (loansRes.data ?? []) as Array<{ user_id: string }>
+  const orders = (ordersRes.data ?? []) as unknown as Array<{ user_id: string }>
+  const activeLoans = (loansRes.data ?? []) as unknown as Array<{ user_id: string }>
 
   const portfolioByUser: Record<string, number> = {}
   holdings.forEach((h) => {

@@ -17,7 +17,7 @@ export default async function WatchlistPage() {
     .select('company_id, companies(id, name, ticker, sector, current_price)')
     .eq('user_id', authUser.id)
 
-  const entries = (watchlistRows ?? []) as Array<{
+  const entries = (watchlistRows ?? []) as unknown as Array<{
     company_id: string
     companies: {
       id: string
@@ -47,7 +47,7 @@ export default async function WatchlistPage() {
       .eq('user_id', authUser.id),
   ])
 
-  const history = (historyRes.data ?? []) as Array<{
+  const history = (historyRes.data ?? []) as unknown as Array<{
     company_id: string
     price: number
     recorded_at: string
@@ -60,7 +60,7 @@ export default async function WatchlistPage() {
     historyByCompany.get(h.company_id)!.push({ price: h.price, recorded_at: h.recorded_at })
   }
 
-  const holdings = (holdingsRes.data ?? []) as Array<{ company_id: string; quantity: number }>
+  const holdings = (holdingsRes.data ?? []) as unknown as Array<{ company_id: string; quantity: number }>
   const holdingByCompany = new Map(holdings.map((h) => [h.company_id, h.quantity]))
 
   const twentyFourHoursAgo = new Date()

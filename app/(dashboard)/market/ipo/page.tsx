@@ -25,7 +25,7 @@ export default async function IPOMarketPage() {
     supabase.from('users').select('cash_balance').eq('id', authUser.id).single(),
   ])
 
-  const ipos = (iposRes.data ?? []) as Array<{
+  const ipos = (iposRes.data ?? []) as unknown as Array<{
     id: string
     company_id: string
     initial_price: number
@@ -44,13 +44,13 @@ export default async function IPOMarketPage() {
     } | null
   }>
 
-  const allApplications = (applicationsRes.data ?? []) as Array<{ ipo_id: string; shares_requested: number }>
+  const allApplications = (applicationsRes.data ?? []) as unknown as Array<{ ipo_id: string; shares_requested: number }>
   const applicationsByIpo: Record<string, number> = {}
   allApplications.forEach((a) => {
     applicationsByIpo[a.ipo_id] = (applicationsByIpo[a.ipo_id] ?? 0) + 1
   })
 
-  const myApplications = (userAppRes.data ?? []) as Array<{
+  const myApplications = (userAppRes.data ?? []) as unknown as Array<{
     ipo_id: string
     shares_requested: number
     amount_paid: number

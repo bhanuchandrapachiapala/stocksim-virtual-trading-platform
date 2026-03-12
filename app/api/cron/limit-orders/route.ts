@@ -28,7 +28,7 @@ export async function GET(request: Request) {
     .eq('status', 'pending')
     .eq('order_type', 'limit')
 
-  const orders = (pendingOrders ?? []) as Array<{
+  const orders = (pendingOrders ?? []) as unknown as Array<{
     id: string
     user_id: string
     company_id: string
@@ -162,7 +162,7 @@ export async function GET(request: Request) {
     .select('id, user_id, company_id, target_price, direction')
     .eq('is_triggered', false)
 
-  const alertList = (alerts ?? []) as Array<{
+  const alertList = (alerts ?? []) as unknown as Array<{
     id: string
     user_id: string
     company_id: string

@@ -18,7 +18,7 @@ export default async function NotificationsPage() {
     .eq('user_id', authUser.id)
     .order('created_at', { ascending: false })
 
-  const list = (notifications ?? []) as Array<{
+  const list = (notifications ?? []) as unknown as Array<{
     id: string
     type: string
     message: string

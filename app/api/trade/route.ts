@@ -287,7 +287,7 @@ export async function POST(request: Request) {
         )
       }
 
-      const lots = (eligibleLots ?? []) as Array<{ id: string; remaining_quantity: number }>
+      const lots = (eligibleLots ?? []) as unknown as Array<{ id: string; remaining_quantity: number }>
       const totalSellableQuantity = lots.reduce((sum, lot) => sum + (lot.remaining_quantity ?? 0), 0)
 
       if (totalSellableQuantity < quantity) {

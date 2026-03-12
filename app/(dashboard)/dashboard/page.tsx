@@ -51,7 +51,7 @@ export default async function DashboardPage() {
     ])
 
   const user = userResult.data
-  const holdingsRaw = (holdingsResult.data ?? []) as Array<{
+  const holdingsRaw = (holdingsResult.data ?? []) as unknown as Array<{
     id: string
     quantity: number
     avg_buy_price: number

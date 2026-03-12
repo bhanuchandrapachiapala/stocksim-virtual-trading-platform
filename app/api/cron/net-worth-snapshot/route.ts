@@ -34,7 +34,7 @@ export async function GET(request: Request) {
       .select('quantity, companies(current_price)')
       .eq('user_id', userId)
 
-    const holdingsList = (holdings ?? []) as Array<{
+    const holdingsList = (holdings ?? []) as unknown as Array<{
       quantity: number
       companies: { current_price: number } | null
     }>

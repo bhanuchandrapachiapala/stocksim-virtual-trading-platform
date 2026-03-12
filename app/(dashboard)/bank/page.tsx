@@ -27,7 +27,7 @@ export default async function BankPage() {
   ])
 
   const cashBalance = (userRes.data as { cash_balance: number } | null)?.cash_balance ?? 0
-  const holdings = (holdingsRes.data ?? []) as Array<{
+  const holdings = (holdingsRes.data ?? []) as unknown as Array<{
     quantity: number
     companies: { current_price: number } | null
   }>
@@ -38,7 +38,7 @@ export default async function BankPage() {
   const netWorth = cashBalance + portfolioValue
   const maxLoanEligible = Math.max(0, Math.floor(netWorth * MAX_LOAN_PERCENT))
 
-  const loans = (loansRes.data ?? []) as Array<{
+  const loans = (loansRes.data ?? []) as unknown as Array<{
     id: string
     principal: number
     interest_rate: number

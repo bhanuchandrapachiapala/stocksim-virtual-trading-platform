@@ -50,7 +50,7 @@ export default async function AdminOverviewPage() {
     companies: { ticker: string } | null
     users: { display_name: string } | null
   }>
-  const recentUsers = (recentUsersRes.data ?? []) as Array<{
+  const recentUsers = (recentUsersRes.data ?? []) as unknown as Array<{
     id: string
     display_name: string
     email: string

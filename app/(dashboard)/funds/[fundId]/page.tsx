@@ -60,7 +60,7 @@ export default async function FundDetailPage({ params }: PageProps) {
       .maybeSingle(),
   ])
 
-  const holdings = (holdingsRes.data ?? []) as Array<{
+  const holdings = (holdingsRes.data ?? []) as unknown as Array<{
     id: string
     company_id: string
     quantity: number
@@ -68,7 +68,7 @@ export default async function FundDetailPage({ params }: PageProps) {
     companies: { id: string; name: string; ticker: string; current_price: number } | null
   }>
 
-  const members = (membersRes.data ?? []) as Array<{
+  const members = (membersRes.data ?? []) as unknown as Array<{
     id: string
     user_id: string
     contribution: number
@@ -137,7 +137,7 @@ export default async function FundDetailPage({ params }: PageProps) {
       myMembership={myMembership}
       isManager={isManager}
       isMember={isMember}
-      companies={(companies ?? []) as Array<{ id: string; name: string; ticker: string; current_price: number }>}
+      companies={(companies ?? []) as unknown as Array<{ id: string; name: string; ticker: string; current_price: number }>}
     />
   )
 }

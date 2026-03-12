@@ -8,7 +8,7 @@ export default async function AdminCompaniesPage() {
     .select('id, name, ticker, sector, current_price, shares_available, created_at')
     .order('created_at', { ascending: false })
 
-  const list = (companies ?? []) as Array<{
+  const list = (companies ?? []) as unknown as Array<{
     id: string
     name: string
     ticker: string

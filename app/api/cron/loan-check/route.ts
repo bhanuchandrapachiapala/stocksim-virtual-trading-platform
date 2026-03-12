@@ -42,7 +42,7 @@ export async function GET(request: Request) {
       .select('id, quantity, company_id, companies(current_price, shares_available)')
       .eq('user_id', userId)
 
-    const holdingsList = (holdings ?? []) as Array<{
+    const holdingsList = (holdings ?? []) as unknown as Array<{
       id: string
       quantity: number
       company_id: string

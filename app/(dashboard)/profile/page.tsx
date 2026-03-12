@@ -64,7 +64,7 @@ export default async function ProfilePage() {
     redirect('/login')
   }
 
-  const holdings = (holdingsRes.data ?? []) as Array<{
+  const holdings = (holdingsRes.data ?? []) as unknown as Array<{
     quantity: number
     companies: { sector: string; current_price: number } | null
   }>
@@ -83,17 +83,17 @@ export default async function ProfilePage() {
     Math.floor((Date.now() - joinedAt.getTime()) / (1000 * 60 * 60 * 24))
   )
 
-  const snapshots = (snapshotsRes.data ?? []) as Array<{
+  const snapshots = (snapshotsRes.data ?? []) as unknown as Array<{
     value: number
     recorded_at: string
   }>
-  const achievements = (achievementsRes.data ?? []) as Array<{
+  const achievements = (achievementsRes.data ?? []) as unknown as Array<{
     badge_name: string
     earned_at: string
   }>
   const totalTrades = typeof ordersCountRes.count === 'number' ? ordersCountRes.count : 0
   const fundsCount = (fundsRes.data ?? []).length
-  const transactions = (transactionsRes.data ?? []) as Array<{
+  const transactions = (transactionsRes.data ?? []) as unknown as Array<{
     id: string
     type: string
     amount: number
@@ -101,8 +101,8 @@ export default async function ProfilePage() {
     created_at: string
   }>
 
-  const allUsers = (allUsersRes.data ?? []) as Array<{ id: string; cash_balance: number }>
-  const allHoldings = (allHoldingsRes.data ?? []) as Array<{
+  const allUsers = (allUsersRes.data ?? []) as unknown as Array<{ id: string; cash_balance: number }>
+  const allHoldings = (allHoldingsRes.data ?? []) as unknown as Array<{
     user_id: string
     quantity: number
     companies: { current_price: number } | null

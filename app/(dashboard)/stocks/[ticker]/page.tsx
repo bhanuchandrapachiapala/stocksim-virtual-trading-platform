@@ -81,9 +81,9 @@ export default async function StockPage({ params }: PageProps) {
       .order('created_at', { ascending: false }),
   ])
 
-  const priceHistory = (historyRes.data ?? []) as Array<{ price: number; recorded_at: string }>
+  const priceHistory = (historyRes.data ?? []) as unknown as Array<{ price: number; recorded_at: string }>
   const holdingData = holdingRes.data
-  const lots = (lotsRes.data ?? []) as Array<{
+  const lots = (lotsRes.data ?? []) as unknown as Array<{
     id: string
     remaining_quantity: number
     buy_price: number
@@ -98,7 +98,7 @@ export default async function StockPage({ params }: PageProps) {
     if (purchasedAt <= cutoff24h) sellableQuantity += qty
     else lockedQuantity += qty
   })
-  const recentOrders = (ordersRes.data ?? []) as Array<{
+  const recentOrders = (ordersRes.data ?? []) as unknown as Array<{
     id: string
     side: string
     quantity: number
@@ -106,7 +106,7 @@ export default async function StockPage({ params }: PageProps) {
     created_at: string
     executed_at: string | null
   }>
-  const relatedNews = (newsRes.data ?? []) as Array<{
+  const relatedNews = (newsRes.data ?? []) as unknown as Array<{
     id: string
     title: string
     body: string
@@ -114,7 +114,7 @@ export default async function StockPage({ params }: PageProps) {
     created_at: string
   }>
   const cashBalance = (userRes.data as { cash_balance: number } | null)?.cash_balance ?? 0
-  const priceAlerts = (priceAlertsRes.data ?? []) as Array<{
+  const priceAlerts = (priceAlertsRes.data ?? []) as unknown as Array<{
     id: string
     target_price: number
     direction: string

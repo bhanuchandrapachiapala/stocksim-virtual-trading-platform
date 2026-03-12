@@ -8,7 +8,7 @@ export default async function AdminNewsPage() {
     .select('id, title, body, ticker_tags, is_pinned, created_at')
     .order('created_at', { ascending: false })
 
-  const articles = (news ?? []) as Array<{
+  const articles = (news ?? []) as unknown as Array<{
     id: string
     title: string
     body: string

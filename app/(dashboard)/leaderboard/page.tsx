@@ -31,26 +31,26 @@ export default async function LeaderboardPage() {
       supabase.from('fund_members').select('fund_id, contribution'),
     ])
 
-  const users = (usersRes.data ?? []) as Array<{
+  const users = (usersRes.data ?? []) as unknown as Array<{
     id: string
     display_name: string
     avatar_url: string | null
     cash_balance: number
   }>
-  const holdings = (holdingsRes.data ?? []) as Array<{
+  const holdings = (holdingsRes.data ?? []) as unknown as Array<{
     user_id: string
     quantity: number
     companies: { current_price: number } | null
   }>
-  const orders = (ordersRes.data ?? []) as Array<{ user_id: string }>
-  const achievements = (achievementsRes.data ?? []) as Array<{ user_id: string }>
-  const funds = (fundsRes.data ?? []) as Array<{
+  const orders = (ordersRes.data ?? []) as unknown as Array<{ user_id: string }>
+  const achievements = (achievementsRes.data ?? []) as unknown as Array<{ user_id: string }>
+  const funds = (fundsRes.data ?? []) as unknown as Array<{
     id: string
     name: string
     total_value: number
     manager_id: string
   }>
-  const fundMembers = (fundMembersRes.data ?? []) as Array<{
+  const fundMembers = (fundMembersRes.data ?? []) as unknown as Array<{
     fund_id: string
     contribution: number
   }>

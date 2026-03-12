@@ -18,7 +18,7 @@ export default async function FundsPage() {
     .select('id, name, description, manager_id, total_value, fee_percent, min_buy_in, created_at')
     .order('created_at', { ascending: false })
 
-  const fundList = (funds ?? []) as Array<{
+  const fundList = (funds ?? []) as unknown as Array<{
     id: string
     name: string
     description: string

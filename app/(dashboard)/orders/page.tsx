@@ -18,7 +18,7 @@ export default async function OrdersPage() {
     .eq('user_id', authUser.id)
     .order('created_at', { ascending: false })
 
-  const list = (orders ?? []) as Array<{
+  const list = (orders ?? []) as unknown as Array<{
     id: string
     company_id: string
     side: string
