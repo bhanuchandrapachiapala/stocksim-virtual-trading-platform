@@ -8,6 +8,8 @@ const RED = '#ef4444'
 const CARD =
   'rounded-xl border border-white/[0.08] bg-white/[0.03] p-5 backdrop-blur-md'
 
+type CompanyRef = { id: string; name: string; ticker: string }
+
 type IPOWithCompany = {
   id: string
   company_id: string
@@ -17,7 +19,8 @@ type IPOWithCompany = {
   subscription_deadline: string
   status: string
   created_at: string
-  companies: { id: string; name: string; ticker: string } | null
+  /** FK join: Supabase may return single object or array */
+  companies: CompanyRef | CompanyRef[] | null
   applications_count: number
 }
 
@@ -215,7 +218,9 @@ export function AdminIPOContent({ ipos: initialIpos, companiesNotInIpo }: AdminI
         >
           <h2 className="mb-4 font-semibold text-white">Active & Past IPOs</h2>
           <ul className="space-y-3 max-h-[500px] overflow-y-auto">
-            {ipos.map((ipo, i) => (
+            {ipos.map((ipo, i) => {
+              const company = Array.isArray(ipo.companies) ? ipo.companies[0] : ipo.companies
+              return (
               <motion.li
                 key={ipo.id}
                 initial={{ opacity: 0, x: 10 }}
@@ -226,7 +231,7 @@ export function AdminIPOContent({ ipos: initialIpos, companiesNotInIpo }: AdminI
                 <div className="flex items-start justify-between gap-2">
                   <div>
                     <p className="font-medium text-white">
-                      {ipo.companies?.name ?? 'Company'} ({ipo.companies?.ticker ?? '—'})
+                      {company?.name ?? 'Company'} ({company?.ticker ?? '—'})
                     </p>
                     <p className="text-sm text-zinc-400">
                       {formatCurrency(ipo.initial_price)} · {ipo.shares_offered.toLocaleString()} shares · applied: {ipo.shares_applied.toLocaleString()}
@@ -254,7 +259,8 @@ export function AdminIPOContent({ ipos: initialIpos, companiesNotInIpo }: AdminI
                   </div>
                 </div>
               </motion.li>
-            ))}
+            )
+            })}
             {ipos.length === 0 && (
               <p className="py-6 text-center text-zinc-500">No IPOs yet.</p>
             )}

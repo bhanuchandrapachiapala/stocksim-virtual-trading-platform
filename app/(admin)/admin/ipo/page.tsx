@@ -24,6 +24,11 @@ export default async function AdminIPOPage() {
     created_at: string
     companies: { id: string; name: string; ticker: string } | null
   }>
+  // Normalize companies from FK join (Supabase may return object or array)
+  const iposNormalized = ipos.map((ipo) => ({
+    ...ipo,
+    companies: Array.isArray(ipo.companies) ? ipo.companies[0] ?? null : ipo.companies,
+  }))
 
   const companiesNotInIpo = (companiesRes.data ?? []) as Array<{
     id: string
@@ -39,7 +44,7 @@ export default async function AdminIPOPage() {
     {}
   )
 
-  const iposWithCount = ipos.map((ipo) => ({
+  const iposWithCount = iposNormalized.map((ipo) => ({
     ...ipo,
     applications_count: appCounts[ipo.id] ?? 0,
   }))
