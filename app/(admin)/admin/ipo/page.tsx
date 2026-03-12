@@ -13,7 +13,7 @@ export default async function AdminIPOPage() {
     supabase.from('ipo_applications').select('ipo_id'),
   ])
 
-  const ipos = (iposRes.data ?? []) as Array<{
+  const ipos = (iposRes.data ?? []) as unknown as Array<{
     id: string
     company_id: string
     initial_price: number
