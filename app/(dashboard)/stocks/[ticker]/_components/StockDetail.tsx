@@ -10,7 +10,7 @@ import {
   LineType,
   CrosshairMode,
 } from 'lightweight-charts'
-import type { UTCTimestamp } from 'lightweight-charts'
+import type { UTCTimestamp, ISeriesApi, LineData, CandlestickData, Time } from 'lightweight-charts'
 import { ArrowUpRight, ArrowDownRight, Pin, Lock } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
@@ -151,7 +151,8 @@ export function StockDetail({
   const [alertTargetPrice, setAlertTargetPrice] = useState('')
   const [alertSubmitting, setAlertSubmitting] = useState(false)
   const [currentPrice, setCurrentPrice] = useState(company.current_price)
-  const chartSeriesRef = useRef<{ update: (data: unknown) => void } | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const chartSeriesRef = useRef<any>(null)
   const chartModeRef = useRef(chartMode)
 
   useEffect(() => {
@@ -283,24 +284,24 @@ export function StockDetail({
       },
     })
 
-    let series: { update: (data: unknown) => void }
     if (chartMode === 'Line') {
-      series = chart.addSeries(LineSeries, {
+      const series = chart.addSeries(LineSeries, {
         color: '#00ff88',
         lineType: LineType.Curved,
         lineWidth: 2,
       })
       series.setData(lineChartData)
+      chartSeriesRef.current = series
     } else {
-      series = chart.addSeries(CandlestickSeries, {
+      const series = chart.addSeries(CandlestickSeries, {
         upColor: '#00ff88',
         downColor: '#ff4444',
         borderUpColor: '#00ff88',
         borderDownColor: '#ff4444',
       })
       series.setData(candlestickChartData)
+      chartSeriesRef.current = series
     }
-    chartSeriesRef.current = series
 
     chart.timeScale().fitContent()
     chartInstanceRef.current = chart
