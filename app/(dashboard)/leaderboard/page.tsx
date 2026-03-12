@@ -55,6 +55,8 @@ export default async function LeaderboardPage() {
     contribution: number
   }>
 
+  // Net worth is computed live from cash_balance + holdings×prices (no net_worth_snapshots),
+  // so every user appears on the leaderboard immediately after joining.
   const portfolioByUser = new Map<string, number>()
   for (const h of holdings) {
     const price = h.companies?.current_price ?? 0
