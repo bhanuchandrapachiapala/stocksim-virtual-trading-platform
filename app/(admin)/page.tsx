@@ -41,7 +41,7 @@ export default async function AdminOverviewPage() {
     funds: fundsCountRes.count ?? 0,
   }
 
-  const recentTrades = (recentOrdersRes.data ?? []) as Array<{
+  const recentTrades = (recentOrdersRes.data ?? []) as unknown as Array<{
     id: string
     user_id: string
     quantity: number
