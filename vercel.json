@@ -1,0 +1,16 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/loan-check",
+      "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/limit-orders",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/cron/net-worth-snapshot",
+      "schedule": "0 23 * * *"
+    }
+  ]
+}
