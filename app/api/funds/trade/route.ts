@@ -77,10 +77,10 @@ export async function POST(request: Request) {
       .select('quantity, companies(current_price)')
       .eq('fund_id', fund_id)
 
-    const holdingsValue = (holdings ?? []).reduce(
-      (sum: number, h: { quantity: number; companies: { current_price: number } | null }) => {
-        const p = h.companies?.current_price ?? 0
-        return sum + h.quantity * p
+    const holdingsValue = ((holdings ?? []) as unknown as Array<{ quantity: number; companies: { current_price: number } | null }>).reduce(
+      (sum, h) => {
+        const price = h.companies?.current_price ?? 0
+        return sum + h.quantity * price
       },
       0
     )
