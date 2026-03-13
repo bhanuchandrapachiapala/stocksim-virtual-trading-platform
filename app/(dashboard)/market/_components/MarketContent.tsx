@@ -286,7 +286,10 @@ export function MarketContent({
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ delay: Math.min(i * 0.02, 0.3) }}
-                    className="group border-b border-white/[0.04] transition-colors hover:border-l-4 hover:border-l-[#00ff88]/50 hover:bg-white/[0.04]"
+                    className="group cursor-pointer border-b border-white/[0.04] transition-colors hover:border-l-4 hover:border-l-[#00ff88]/50 hover:bg-white/[0.04]"
+                    onClick={() => {
+                      window.location.href = `/stocks/${c.ticker}`
+                    }}
                   >
                     <td className="px-5 py-3 text-zinc-500">{i + 1}</td>
                     <td className="px-5 py-3">

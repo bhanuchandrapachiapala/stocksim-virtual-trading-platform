@@ -283,7 +283,12 @@ export function DashboardContent({
                         initial={{ opacity: 0, x: -8 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 + i * 0.04 }}
-                        className="border-b border-white/[0.04] transition-colors hover:bg-white/[0.04]"
+                        className="cursor-pointer border-b border-white/[0.04] transition-colors hover:bg-white/[0.04]"
+                        onClick={() => {
+                          if (ticker !== '—') {
+                            window.location.href = `/stocks/${ticker}`
+                          }
+                        }}
                       >
                         <td className="px-5 py-3">
                           <div className="flex items-center gap-3">
