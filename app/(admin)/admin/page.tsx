@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { AdminOverviewContent } from './admin/_components/AdminOverviewContent'
+import { AdminOverviewContent } from './_components/AdminOverviewContent'
 
 export default async function AdminOverviewPage() {
   const supabase = await createClient()
