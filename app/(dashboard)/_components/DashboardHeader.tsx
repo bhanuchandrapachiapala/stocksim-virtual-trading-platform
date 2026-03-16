@@ -46,7 +46,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
     }).format(n)
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-white/[0.06] bg-[#0a0a0f] px-6">
+    <header className="sticky top-0 z-30 hidden lg:flex h-14 items-center justify-between border-b border-white/[0.06] bg-[#0a0a0f] px-6">
       <h1 className="text-lg font-semibold text-white">{title}</h1>
       <div className="flex items-center gap-3">
         {user && (
