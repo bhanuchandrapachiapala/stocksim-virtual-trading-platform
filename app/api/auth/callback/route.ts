@@ -4,14 +4,13 @@ import { NextResponse, type NextRequest } from 'next/server'
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
-  const next = requestUrl.searchParams.get('next') ?? '/dashboard'
+  const tokenHash = requestUrl.searchParams.get('token_hash')
+  const type = requestUrl.searchParams.get('type')
 
-  if (!code) {
-    return NextResponse.redirect(new URL('/login', requestUrl.origin))
-  }
-
-  const successRedirect = NextResponse.redirect(new URL(next, requestUrl.origin))
-  const loginRedirect = NextResponse.redirect(new URL('/login', requestUrl.origin))
+  const successRedirect = NextResponse.redirect(new URL('/dashboard', requestUrl.origin))
+  const errorRedirect = NextResponse.redirect(
+    new URL('/login?error=confirmation_failed', requestUrl.origin)
+  )
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -30,11 +29,24 @@ export async function GET(request: NextRequest) {
     }
   )
 
-  const { error } = await supabase.auth.exchangeCodeForSession(code)
-
-  if (error) {
-    return loginRedirect
+  if (tokenHash && type) {
+    const { error } = await supabase.auth.verifyOtp({
+      token_hash: tokenHash,
+      type: type as 'email' | 'magiclink' | 'recovery' | 'signup',
+    })
+    if (error) {
+      return errorRedirect
+    }
+    return successRedirect
   }
 
-  return successRedirect
+  if (code) {
+    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    if (error) {
+      return errorRedirect
+    }
+    return successRedirect
+  }
+
+  return errorRedirect
 }
