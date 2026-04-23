@@ -35,4 +35,4 @@ Every new user starts with **$9,000 in virtual cash** and jumps straight into a 
 
 *Virtual platform only. Not real financial advice.*
 
-Designed & Developed by **Bhanu Chandra**
+Designed & Developed by **Bhanu Chandra Pachipala**
